@@ -1,0 +1,24 @@
+#use chroot = false
+strict modes = false
+#hosts allow = *
+log file = rsyncd.log
+read only = false
+transfer logging = yes
+
+# Module definitions
+# Remember cygwin naming conventions : c:\work becomes /cygwin/c/work
+#
+#[test]
+#path = /cygdrive/c/work
+#read only = false
+#transfer logging = yes
+
+[rsyncmerckmpls]
+   path = /cygdrive/I/Merck_Masters/PCBU93007/Images
+   comment - rsync MPLS Merck Asset data to Schawk Chennai chenfile04.asia.schawk.com
+#   uid = 0
+#   gid = 0
+   read only = false
+   list = yes
+   hosts allow = 10.26.26.110
+   time
