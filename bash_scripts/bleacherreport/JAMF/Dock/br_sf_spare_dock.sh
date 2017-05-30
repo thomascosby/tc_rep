@@ -73,31 +73,30 @@
 ##########################################################################################
 #
 #  Variables
-REMOVE=/usr/bin/local/dockutil --remove
-ADD=/usr/bin/local/dockutil --add
-MOVE=/usr/bin/local/docutil --move
+#REMOVE=/usr/bin/localdockutil --remove
+#ADD=/usr/bin/local/dockutil --add
+#MOVE=/usr/bin/local/docutil --move
 #
 ##########################################################################################
 
-
-$REMOVE 'Mail' --allhomes
-$REMOVE 'Launchpad' --allhomes
-$REMOVE 'Siri' --allhomes
-$REMOVE 'System Preferences' --allhomes
-$REMOVE 'Contacts' --allhomes
-$REMOVE 'Calendar' --allhomes
-$REMOVE 'Notes' --allhomes
-$REMOVE 'Reminders' --allhomes
-$REMOVE 'Maps' --allhomes
-$REMOVE 'Photos' --allhomes
-$REMOVE 'Messages' --allhomes
-$REMOVE 'Safari' --allhomes
-$REMOVE 'FaceTime' --allhomes
-$REMOVE 'iBooks' --allhomes
-$REMOVE 'App Store' --allhomes
-$ADD /Applications/Google\ Chrome.app --label 'Chrome' --positon 1  --allhomes
-$ADD /Applications/Slack.app --position 2 --allhomes
-$ADD /Applications/Keynote.app --position 3 --allhomes
+dockutil --add /Applications/Google\ Chrome.app --label 'Chrome' --positon 1  --allhomes
+dockutil --add /Applications/Slack.app --position 2 --allhomes
+dockutil --add /Applications/Keynote.app --position 3 --allhomes
+dockutil --remove 'Mail' --allhomes
+dockutil --remove 'Launchpad' --allhomes
+dockutil --remove 'Siri' --allhomes
+dockutil --remove 'System Preferences' --allhomes
+dockutil --remove 'Contacts' --allhomes
+dockutil --remove 'Calendar' --allhomes
+dockutil --remove 'Notes' --allhomes
+dockutil --remove 'Reminders' --allhomes
+dockutil --remove 'Maps' --allhomes
+dockutil --remove 'Photos' --allhomes
+dockutil --remove 'Messages' --allhomes
+dockutil --remove 'Safari' --allhomes
+dockutil --remove 'FaceTime' --allhomes
+dockutil --remove 'iBooks' --allhomes
+dockutil --remove 'App Store' --allhomes
 
 
 exit 0
