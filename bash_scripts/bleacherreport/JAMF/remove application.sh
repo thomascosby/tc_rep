@@ -6,7 +6,7 @@
 ###########          Version 1.0          ##########
 ###########                               ##########31
 ###########   created by - Thomas Cosby   ##########
-###########           2018 03 01          ##########
+###########           2017 11 03          ##########
 ###########          __        __         ##########
 ###########         /\ \   *  /\ \        ##########
 ###########         \:\ \    /::\ \       ##########
@@ -24,40 +24,21 @@
 ####################################################
 ####################################################
 ####################################################
-           _ _ _ _ _ _ _
-         /\_ _ _   _ _ _\ 
-         \/_ _ /\  \_ _ /
-               \ \  \
-                \ \  \
-                 \ \  \
-                  \ \  \
-                   \ \ _\
-                    \/ _/
-
 #  Version History
 #  
 #  
 ####################################################
 #  
-#  this script logs functions to $LOG_DIR
-#  change $LOG_DIR to desired location
-####################################################
+#  this script removes Applications defined in Parameter 4
+#+ located in Script Options in the JSS
+#+ change parameter 4 in the JSS to desired Application name
 
-#  variables
-LOG_DIR=/Users/thomas/Desktop/script_log.txt
-#
-####################################################
+#  varibles
+applicationPath="$4"
+	
+echo "Removing application: $applicationPath"
 
-#  dividing lines for log file 
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  separated by date
-date +"%D - %T" >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  adjust functionality as desired
-whoami >> $LOG_DIR ; who >> $LOG_DIR ; uptime >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  added empty line at end of text
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR ; echo "" >> $LOG_DIR
+rm -Rf "$applicationPath"
 
 exit 0
 #  A zero return value from the script upon exit indicates success

@@ -6,7 +6,7 @@
 ###########          Version 1.0          ##########
 ###########                               ##########31
 ###########   created by - Thomas Cosby   ##########
-###########           2018 03 01          ##########
+###########           2018 02 23          ##########
 ###########          __        __         ##########
 ###########         /\ \   *  /\ \        ##########
 ###########         \:\ \    /::\ \       ##########
@@ -24,40 +24,29 @@
 ####################################################
 ####################################################
 ####################################################
-           _ _ _ _ _ _ _
-         /\_ _ _   _ _ _\ 
-         \/_ _ /\  \_ _ /
-               \ \  \
-                \ \  \
-                 \ \  \
-                  \ \  \
-                   \ \ _\
-                    \/ _/
-
 #  Version History
 #  
 #  
 ####################################################
 #  
-#  this script logs functions to $LOG_DIR
-#  change $LOG_DIR to desired location
+#  this script installs JumpCloud Agent
+#
 ####################################################
-
+#
 #  variables
-LOG_DIR=/Users/thomas/Desktop/script_log.txt
 #
 ####################################################
 
-#  dividing lines for log file 
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  separated by date
-date +"%D - %T" >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  adjust functionality as desired
-whoami >> $LOG_DIR ; who >> $LOG_DIR ; uptime >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  added empty line at end of text
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR ; echo "" >> $LOG_DIR
+curl -o /tmp/jumpcloud-agent.pkg "https://s3.amazonaws.com/jumpcloud-windows-agent/production/jumpcloud-agent.pkg"
+mkdir -p /opt/jc
+cat <<-EOF > /opt/jc/agentBootstrap.json
+{
+"publicKickstartUrl": "https://kickstart.jumpcloud.com:443",
+"privateKickstartUrl": "https://private-kickstart.jumpcloud.com:443",
+"connectKey": "2c0f7c5ae0f6eb699b669b4021d53b65c9c1de44"
+}
+EOF
+installer -pkg /tmp/jumpcloud-agent.pkg -target /
 
 exit 0
 #  A zero return value from the script upon exit indicates success

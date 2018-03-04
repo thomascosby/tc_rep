@@ -6,7 +6,7 @@
 ###########          Version 1.0          ##########
 ###########                               ##########31
 ###########   created by - Thomas Cosby   ##########
-###########           2018 03 01          ##########
+###########           2018 02 23          ##########
 ###########          __        __         ##########
 ###########         /\ \   *  /\ \        ##########
 ###########         \:\ \    /::\ \       ##########
@@ -24,40 +24,36 @@
 ####################################################
 ####################################################
 ####################################################
-           _ _ _ _ _ _ _
-         /\_ _ _   _ _ _\ 
-         \/_ _ /\  \_ _ /
-               \ \  \
-                \ \  \
-                 \ \  \
-                  \ \  \
-                   \ \ _\
-                    \/ _/
-
 #  Version History
 #  
 #  
 ####################################################
 #  
-#  this script logs functions to $LOG_DIR
-#  change $LOG_DIR to desired location
+#  this script removes JumpCloud Agent
+#
 ####################################################
-
+#
 #  variables
-LOG_DIR=/Users/thomas/Desktop/script_log.txt
 #
 ####################################################
 
-#  dividing lines for log file 
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  separated by date
-date +"%D - %T" >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  adjust functionality as desired
-whoami >> $LOG_DIR ; who >> $LOG_DIR ; uptime >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  added empty line at end of text
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR ; echo "" >> $LOG_DIR
+if [[ $(id -u) -ne 0 ]]; then
+    echo "Must run as root!"
+    exit 1
+fi
+
+launchctl remove com.jumpcloud.darwin-agent
+rm /Library/LaunchDaemons/com.jumpcloud.darwin-agent.plist
+
+sw_vers -productVersion | cut -d'.' -f1-2  | grep '^10.9$' &> /dev/null
+if [[ $? -ne 0 ]]; then
+    security authorizationdb read system.login.console | \
+        sed 's#<string>jumpcloud-loginwindow:invoke</string>#<string>loginwindow:login</string>#' | \
+        security authorizationdb write system.login.console
+fi
+
+rm -rf /Library/Security/SecurityAgentPlugins/jumpcloud-loginwindow.bundle
+rm -rf /opt/jc
 
 exit 0
 #  A zero return value from the script upon exit indicates success

@@ -6,7 +6,7 @@
 ###########          Version 1.0          ##########
 ###########                               ##########31
 ###########   created by - Thomas Cosby   ##########
-###########           2018 03 01          ##########
+###########           2018 02 07          ##########
 ###########          __        __         ##########
 ###########         /\ \   *  /\ \        ##########
 ###########         \:\ \    /::\ \       ##########
@@ -24,40 +24,19 @@
 ####################################################
 ####################################################
 ####################################################
-           _ _ _ _ _ _ _
-         /\_ _ _   _ _ _\ 
-         \/_ _ /\  \_ _ /
-               \ \  \
-                \ \  \
-                 \ \  \
-                  \ \  \
-                   \ \ _\
-                    \/ _/
-
 #  Version History
 #  
 #  
 ####################################################
 #  
-#  this script logs functions to $LOG_DIR
-#  change $LOG_DIR to desired location
-####################################################
-
-#  variables
-LOG_DIR=/Users/thomas/Desktop/script_log.txt
+#  If you want to delete every user Preferences and
+#+ Cache, and launch Chrome as if it was its first run
 #
-####################################################
 
-#  dividing lines for log file 
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  separated by date
-date +"%D - %T" >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  adjust functionality as desired
-whoami >> $LOG_DIR ; who >> $LOG_DIR ; uptime >> $LOG_DIR
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR
-#  added empty line at end of text
-echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" >> $LOG_DIR ; echo "" >> $LOG_DIR
+rm ~/Library/Preferences/com.google.Chrome.plist
+rm -rf ~/Library/Caches/Google/
+rm -rf ~/Library/Application\ Support/Google/Chrome/
+Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --force-first-run
 
 exit 0
 #  A zero return value from the script upon exit indicates success
